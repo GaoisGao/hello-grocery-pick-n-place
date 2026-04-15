@@ -1,0 +1,42 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    # TO SWITCH TO ROBOTIQ 2F-85: add a robotiq_gripper_controller entry here
+    # and restore the separate gripper_controller spawner in the launch file.
+
+joint_trajectory_controller:
+  ros__parameters:
+    # Arm joints + gripper finger joints — all controlled by one trajectory controller.
+    # This avoids the instability issues with JointGroupPositionController and
+    # gz_ros2_control's low position_proportional_gain on small prismatic joints.
+    #
+    # allow_partial_joints_goal: true means you can send a trajectory that only
+    # specifies some joints (e.g. just the fingers, or just the arm) and the
+    # controller will hold the others at their current position.
+    #
+    # TO SWITCH TO ROBOTIQ 2F-85: remove left_finger_joint and right_finger_joint
+    # from this list and restore a separate gripper_controller block instead.
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+      - left_finger_joint
+      - right_finger_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: true

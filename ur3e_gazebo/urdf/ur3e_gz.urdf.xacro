@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur3e">
+
+  <!-- Pull in the upstream UR robot macro -->
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+
+  <!-- Fixed world link -->
+  <link name="world"/>
+
+  <!-- Expand the UR3e robot -->
+  <xacro:ur_robot
+    name="ur3e"
+    tf_prefix=""
+    parent="world"
+    joint_limits_parameters_file="$(find ur_description)/config/ur3e/joint_limits.yaml"
+    kinematics_parameters_file="$(find ur_description)/config/ur3e/default_kinematics.yaml"
+    physical_parameters_file="$(find ur_description)/config/ur3e/physical_parameters.yaml"
+    visual_parameters_file="$(find ur_description)/config/ur3e/visual_parameters.yaml"
+    safety_limits="false"
+    force_abs_paths="true">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:ur_robot>
+
+  <!-- ros2_control hardware interface for Gazebo simulation -->
+  <ros2_control name="ur3e" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <joint name="shoulder_pan_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="shoulder_lift_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">-1.57</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="elbow_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">1.57</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_1_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">-1.57</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_2_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_3_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- ===== GRIPPER JOINTS (custom two-finger design) =====
+         TO SWITCH TO ROBOTIQ 2F-85:
+           Remove these two joint entries and replace them with the finger
+           joints defined in the Robotiq URDF (typically mimic_joint and
+           finger_joint). The Robotiq package provides its own ros2_control
+           block — copy it here instead. Joint names and interfaces will differ.
+    -->
+    <joint name="left_finger_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="right_finger_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <!-- ===== END GRIPPER JOINTS ===== -->
+
+  </ros2_control>
+
+  <!-- Gazebo plugin: connects ros2_control to Gazebo physics -->
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find ur3e_gazebo)/config/ros2_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+  <!-- ===== ARM CAMERAS ===== -->
+  <!-- Mounted on wrist_3_link (not tool0) so the gripper can attach to tool0 without conflict.
+       Offset 4 cm to the side and 6 cm along the wrist axis, angled 17° down to see the
+       gripper workspace. Position may need tuning once the gripper is added in Phase 8. -->
+
+  <!-- Camera mount link — small box representing the camera body -->
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.06 0.02"/>
+      </geometry>
+      <material name="camera_black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <!-- Fixed joint: attaches camera_link to wrist_3_link -->
+  <joint name="camera_joint" type="fixed">
+    <parent link="wrist_3_link"/>
+    <child link="camera_link"/>
+    <!-- 4 cm to the side (Y), 6 cm along the wrist axis (Z), angled ~17 deg down -->
+    <origin xyz="0 0.04 0.06" rpy="0 0.3 0"/>
+  </joint>
+
+  <!-- RGB camera sensor -->
+  <gazebo reference="camera_link">
+    <sensor name="arm_rgb_camera" type="camera">
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <camera name="arm_camera">
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>RGB_INT8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>10.0</far>
+        </clip>
+      </camera>
+      <topic>/arm_camera/image_raw</topic>
+    </sensor>
+  </gazebo>
+
+  <!-- ================================================================
+       GRIPPER — Custom two-finger design (Option 1)
+
+       This is a minimal gripper built from box primitives. It is
+       intentionally simple to keep dependencies low and setup fast.
+
+       TO SWITCH TO ROBOTIQ 2F-85 (Option 2):
+         1. Remove everything between "BEGIN CUSTOM GRIPPER" and
+            "END CUSTOM GRIPPER" below.
+         2. Clone the Robotiq ROS 2 description package:
+              git clone https://github.com/ros-industrial/robotiq.git
+            Check out a branch compatible with ROS 2 Kilted / Gazebo Ionic.
+         3. Include the Robotiq xacro macro here:
+              <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85.urdf.xacro"/>
+              <xacro:robotiq_2f_85 parent="tool0" .../>
+         4. Update ros2_controllers.yaml to use the Robotiq controller config.
+         5. Update pick_and_place.py — the gripper topic and joint names differ.
+            Robotiq typically uses /robotiq_gripper_controller/gripper_cmd
+            (action interface) rather than a position topic.
+
+       STRUCTURE (custom design):
+         tool0
+           └── gripper_base_link  (fixed joint — the palm)
+                 ├── left_finger_link   (prismatic joint — slides +X to open)
+                 └── right_finger_link  (prismatic joint — slides -X to open)
+
+       JOINT LIMITS:
+         0.0 = fully closed (fingers touching)
+         0.04 = fully open (4 cm gap between fingers)
+  ================================================================ -->
+
+  <!-- BEGIN CUSTOM GRIPPER -->
+
+  <!-- Palm — flat box attached rigidly to tool0.
+       Sized wide enough (12 cm) to accommodate finger joints at ±5 cm.
+       Extends 4 cm along the tool approach axis (Z) from tool0. -->
+  <link name="gripper_base_link">
+    <visual>
+      <!-- Center the visual at the midpoint of the palm depth (2 cm) -->
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.12 0.06 0.04"/>
+      </geometry>
+      <material name="gripper_grey">
+        <color rgba="0.4 0.4 0.4 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.12 0.06 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0002" iyy="0.0002" izz="0.0002" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <!-- Fixed joint: gripper palm attaches to tool0 (the arm tip) -->
+  <!-- TO SWITCH TO ROBOTIQ: remove this joint and the palm link above,
+       the Robotiq macro handles its own attachment to tool0. -->
+  <joint name="gripper_base_joint" type="fixed">
+    <parent link="tool0"/>
+    <child link="gripper_base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Left finger — slides in +X direction to open.
+       Joint origin is at the end of the palm (Z=0.04) and 5 cm to the left (+X).
+       When closed (joint=0):   inner face is at ~4.25 cm from center — grips apple (r=4 cm).
+       When open  (joint=0.05): inner face is at ~9.25 cm from center — clears apple easily. -->
+  <link name="left_finger_link">
+    <visual>
+      <!-- Center the visual at the midpoint of the finger length (5 cm) -->
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <!-- 1.5 cm thick (X) × 4 cm wide (Y) × 10 cm long (Z) -->
+        <box size="0.015 0.04 0.10"/>
+      </geometry>
+      <material name="gripper_dark">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.04 0.10"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <!-- Prismatic joint: left finger slides along +X to open -->
+  <!-- TO SWITCH TO ROBOTIQ: remove this joint and the left finger link. -->
+  <joint name="left_finger_joint" type="prismatic">
+    <parent link="gripper_base_link"/>
+    <child link="left_finger_link"/>
+    <!-- Start at end of palm (Z=0.04), 5 cm to the left (+X) -->
+    <origin xyz="0.05 0 0.04" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <!-- 0.0 = closed (gripping), 0.05 = fully open (5 cm per side = 10 cm total extra gap) -->
+    <!-- 1 mm buffers keep the joint off exact limit boundaries, preventing
+         gz_ros2_control's JointSaturationLimiter from firing on IEEE -0.0 or +0.0. -->
+    <limit lower="-0.03" upper="0.051" effort="20" velocity="1.0"/>
+    <!-- Damping prevents instant snapping and allows the controller to
+         smoothly hold and drive the joint in both directions. -->
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+
+  <!-- Right finger — mirror of left, slides in -X direction to open. -->
+  <link name="right_finger_link">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.04 0.10"/>
+      </geometry>
+      <material name="gripper_dark2">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.04 0.10"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <!-- Prismatic joint: right finger slides along -X to open (mirror of left) -->
+  <joint name="right_finger_joint" type="prismatic">
+    <parent link="gripper_base_link"/>
+    <child link="right_finger_link"/>
+    <!-- Start at end of palm (Z=0.04), 5 cm to the right (-X) -->
+    <origin xyz="-0.05 0 0.04" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <!-- Same 1 mm buffers as left_finger_joint — prevents -0.0 boundary errors. -->
+    <limit lower="-0.03" upper="0.051" effort="20" velocity="1.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+
+  <!-- END CUSTOM GRIPPER -->
+
+  <!-- ================================================================ -->
+
+  <!-- Depth (RGBD) camera sensor -->
+  <gazebo reference="camera_link">
+    <sensor name="arm_depth_camera" type="rgbd_camera">
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <camera name="arm_depth">
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>RGB_INT8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>10.0</far>
+        </clip>
+      </camera>
+      <topic>/arm_depth_camera</topic>
+    </sensor>
+  </gazebo>
+
+</robot>

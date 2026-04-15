@@ -1,0 +1,316 @@
+<sdf version='1.12'>
+  <world name='empty'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <plugin name='gz::sim::systems::Sensors' filename='gz-sim-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='table'>
+      <static>true</static>
+      <pose>0.6 0 0 0 0 0</pose>
+      <link name="tabletop">
+        <pose>0 0 0 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.8 2 0.05</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.8 2 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.5 0.35 0.15 1</ambient>
+            <diffuse>0.5 0.35 0.15 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="apple">
+      <static>false</static>
+      <pose>0.35 0 0.065 0 0 0</pose>
+      <link name="apple_link">
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.04</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.04</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.8 0.1 0.1 1</ambient>
+            <diffuse>0.8 0.1 0.1 1</diffuse>
+          </material>
+        </visual>
+        <inertial>
+          <mass>0.15</mass>
+          <inertia>
+            <ixx>0.000096</ixx>
+            <iyy>0.000096</iyy>
+            <izz>0.000096</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+
+    <!-- ============================================================
+         SHELF (represents the fridge/refrigerator)
+         Positioned on the OPPOSITE side of the arm from the table.
+         The arm base is at (0,0,0). Table is at x=+0.6. Shelf is at x=-0.6.
+
+         TO ADJUST POSITION: change the <pose> on the <model> tag below.
+           - Move closer/further from arm: change the first number (x)
+           - Shift left/right: change the second number (y)
+           - The third number (z) should stay 0 — shelf sits on the floor
+
+         TO ADJUST OVERALL SIZE: scale the <size> values on each link.
+           - First number = width (left-right, along Y axis)
+           - Second number = depth (front-back, along X axis)
+           - Third number = height/thickness (along Z axis)
+    ============================================================ -->
+    <model name='shelf'>
+      <static>true</static>
+
+      <!-- Model origin is at floor level, centered on the shelf -->
+      <!-- TO MOVE THE SHELF: edit x (forward/back) and y (left/right) here -->
+      <pose>-0.55 0 0 0 0 0</pose>
+
+      <!-- BACK PANEL — the tall vertical back wall of the shelf -->
+      <!-- TO ADJUST: change size to make it wider (y), taller (z), or thicker (x) -->
+      <link name='back_panel'>
+        <!-- z=0.125 centers the panel vertically (panel is 0.25m tall, so center is at 0.125m) -->
+        <!-- TO ADJUST HEIGHT: change z here to half of whatever the panel height is -->
+        <pose>0 0 0.25 0 0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <!-- size: depth(x)=0.03m  width(y)=1.0m  height(z)=0.25m -->
+            <!-- TO MAKE WIDER: increase the second number -->
+            <!-- TO MAKE TALLER: increase the third number (and update the pose z above) -->
+            <box><size>0.03 1.0 0.5</size></box>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box><size>0.03 1.2 0.5</size></box>
+          </geometry>
+          <!-- Light grey color to suggest a fridge interior -->
+          <!-- TO CHANGE COLOR: edit R G B values (each 0.0–1.0) -->
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.15 0.15 0.15 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- BOTTOM SHELF BOARD — sits on the floor -->
+      <!-- TO ADJUST: change the z in <pose> to raise or lower this board -->
+      <link name='shelf_board_bottom'>
+        <!-- z=0.0075 = half the thickness, so the board sits flush on the floor -->
+        <pose>0.15 0 0.0075 0 0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <!-- size: depth(x)=0.3m  width(y)=1.0m  thickness(z)=0.015m -->
+            <!-- TO MAKE DEEPER (more room front-to-back): increase the first number -->
+            <box><size>0.3 1.0 0.015</size></box>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box><size>0.3 1.0 0.015</size></box>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.15 0.15 0.15 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- MIDDLE SHELF BOARD -->
+      <!-- TO RAISE OR LOWER: change z in <pose> below -->
+      <link name='shelf_board_middle'>
+        <pose>0.15 0 0.3 0 0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box><size>0.3 1.0 0.015</size></box>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box><size>0.3 1.0 0.015</size></box>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.15 0.15 0.15 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+    </model>
+
+    <!-- ============================================================
+         OVERHEAD CAMERA
+         Fixed camera mounted 1.2 m above the table, pointing straight
+         down. Gives a bird's-eye view of the full table surface —
+         useful for CV to detect and locate objects before the arm moves.
+
+         Position: x=0.35 (centered over the apple/table area), z=1.2 m
+         Orientation: rotated 90° around X so the sensor points down (-Z)
+
+         TO MOVE: change x/y in the <pose> to shift the camera's footprint.
+         TO RAISE/LOWER: change z in the <pose>.
+    ============================================================ -->
+    <model name='overhead_camera'>
+      <static>true</static>
+      <!-- x=0.35 centers over the table work area; z=1.2 gives a wide field of view -->
+      <pose>0.35 0 1.2 0 1.5708 0</pose>
+      <link name='overhead_camera_link'>
+        <!-- Small box representing the camera body -->
+        <visual name='visual'>
+          <geometry>
+            <box><size>0.05 0.05 0.03</size></box>
+          </geometry>
+          <material>
+            <ambient>0.1 0.1 0.1 1</ambient>
+            <diffuse>0.1 0.1 0.1 1</diffuse>
+          </material>
+        </visual>
+        <!-- No collision — the camera is a sensor-only object -->
+
+        <!-- RGB camera — color image of the table surface -->
+        <sensor name='overhead_rgb_camera' type='camera'>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <camera name='overhead_camera'>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>RGB_INT8</format>
+            </image>
+            <clip>
+              <near>0.01</near>
+              <far>5.0</far>
+            </clip>
+          </camera>
+          <topic>/overhead_camera/image_raw</topic>
+        </sensor>
+
+        <!-- Depth camera — 3D point cloud of the table surface -->
+        <sensor name='overhead_depth_camera' type='rgbd_camera'>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <camera name='overhead_depth'>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>RGB_INT8</format>
+            </image>
+            <clip>
+              <near>0.01</near>
+              <far>5.0</far>
+            </clip>
+          </camera>
+          <topic>/overhead_depth_camera</topic>
+        </sensor>
+      </link>
+    </model>
+
+  </world>
+</sdf>
