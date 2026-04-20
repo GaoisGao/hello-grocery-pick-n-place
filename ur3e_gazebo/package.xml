@@ -3,8 +3,8 @@
 <package format="3">
   <name>ur3e_gazebo</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="alex.goodheart.kautz@gmail.com">Alex Kautz</maintainer>
+  <description>Setting up ur3e in Gazebo</description>
+  <maintainer email="Zhenkai.Gao@tufts.edu">Zhenkai Gao</maintainer>
   <license>TODO: License declaration</license>
 
   <depend>ros2launch</depend>
