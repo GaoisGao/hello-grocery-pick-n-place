@@ -1,2 +1,2 @@
 # hello-grocery-pick-n-place
-A robotic project aims to handle grocery at home
+A robotics project aims to handle groceries at home.
