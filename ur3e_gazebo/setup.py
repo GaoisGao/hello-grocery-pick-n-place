@@ -19,9 +19,9 @@ setup(
     package_data={'': ['py.typed']},
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Alex Kautz',
-    maintainer_email='alex.goodheart.kautz@gmail.com',
-    description='TODO: Package description',
+    maintainer='Zhenkai Gao',
+    maintainer_email='Zhenkai.Gao@tufts.edu',
+    description='Setting up ur3e in Gazebo',
     license='TODO: License declaration',
     extras_require={
         'test': [
@@ -38,3 +38,4 @@ setup(
         ],
     },
 )
+
