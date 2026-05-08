@@ -47,7 +47,7 @@ Before running any ROS 2 node, source the ROS 2 Kilted environment and the works
 source /opt/ros/kilted/setup.bash
 source ~/ros2_ws/install/setup.bash
 
-## Terminal 1: Start the UR3e Driver
+Terminal 1: Start the UR3e Driver
 
 Launch the Universal Robots driver and connect to the physical UR3e robot:
 
@@ -59,7 +59,7 @@ ros2 launch ur_robot_driver ur_control.launch.py \
   robot_ip:=10.3.4.11 \
   launch_rviz:=false
 
-## Terminal 2: Start MoveIt
+Terminal 2: Start MoveIt
 
 Launch the MoveIt configuration for the UR3e arm:
 
@@ -74,7 +74,7 @@ Optional motion test:
 
 ros2 run ur3e_demo move_client_with_env
 
-## Terminal 3: Start the RealSense Camera
+Terminal 3: Start the RealSense Camera
 
 Launch the RealSense RGB-D camera with aligned depth enabled:
 
@@ -88,7 +88,7 @@ ros2 launch realsense2_camera rs_launch.py \
   depth_module.depth_profile:=640x480x30 \
   rgb_camera.color_profile:=640x480x30
 
-## Terminal 4: Run YOLOv11 Object Detection
+Terminal 4: Run YOLOv11 Object Detection
 
 Run YOLOv11 on the RealSense color image topic:
 
@@ -118,7 +118,7 @@ Alternatively, use rqt_image_view:
 
 ros2 run rqt_image_view rqt_image_view /yolo/dbg_image
 
-## Terminal 5: Publish the Camera Mount TF
+Terminal 5: Publish the Camera Mount TF
 
 Launch the project bringup file to publish the static transform between the robot tool frame and the camera frame:
 
@@ -131,7 +131,7 @@ This should publish the transform:
 
 tool0 → camera_link
 
-## Terminal 6: Run the Object Pose Estimator
+Terminal 6: Run the Object Pose Estimator
 
 Estimate the 3D position of the target object from YOLO detections and aligned depth data:
 
@@ -145,7 +145,7 @@ ros2 run grocery_perception object_pose_estimator --ros-args \
   -p buffer_size:=10 \
   -p max_position_std_m:=0.025
 
-## Terminal 7: Transform Object Pose to Robot Base Frame
+Terminal 7: Transform Object Pose to Robot Base Frame
 
 Transform the detected object pose from the camera frame into the UR3e base_link frame:
 
@@ -155,7 +155,7 @@ source ~/ros2_ws/install/setup.bash
 ros2 run grocery_perception object_pose_transformer --ros-args \
   -p target_frame:=base_link
 
-## Terminal 8: Run the Pick Planner
+Terminal 8: Run the Pick Planner
 
 Generate pre-grasp, grasp, and lift poses based on the transformed object position:
 
@@ -167,7 +167,7 @@ ros2 run grocery_perception pick_planner --ros-args \
   -p grasp_z_offset:=0.08 \
   -p lift_z_offset:=0.28
 
-## Terminal 9: Execute the Pick Motion
+Terminal 9: Execute the Pick Motion
 
 Run the pick executor to send the planned poses to MoveIt and execute the robot trajectory:
 
@@ -190,7 +190,7 @@ For safer testing, set:
 
 This allows MoveIt to plan the motion without executing it on the real robot.
 
-## Terminal 10: Run the SO-101 Gripper Node
+Terminal 10: Run the SO-101 Gripper Node
 
 The SO-101 gripper node runs inside the lerobot conda environment:
 
