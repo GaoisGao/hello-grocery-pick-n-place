@@ -1,0 +1,26 @@
+[1.777s] Invoking command in '/home/roboticslab/ros2_ws/build/ur3e_demo': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/ur3e_demo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/ur3e_demo/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/ur3e_demo/build --no-deps symlink_data
+[2.299s] running develop
+[2.710s] running egg_info
+[2.710s] creating ur3e_demo.egg-info
+[2.749s] writing ur3e_demo.egg-info/PKG-INFO
+[2.750s] writing dependency_links to ur3e_demo.egg-info/dependency_links.txt
+[2.750s] writing entry points to ur3e_demo.egg-info/entry_points.txt
+[2.750s] writing requirements to ur3e_demo.egg-info/requires.txt
+[2.750s] writing top-level names to ur3e_demo.egg-info/top_level.txt
+[2.750s] writing manifest file 'ur3e_demo.egg-info/SOURCES.txt'
+[2.832s] reading manifest file 'ur3e_demo.egg-info/SOURCES.txt'
+[2.833s] writing manifest file 'ur3e_demo.egg-info/SOURCES.txt'
+[2.874s] running build_ext
+[2.875s] Creating /home/roboticslab/ros2_ws/install/ur3e_demo/lib/python3.12/site-packages/ur3e-demo.egg-link (link to .)
+[2.875s] Installing hardcoded_pick_bt script to /home/roboticslab/ros2_ws/install/ur3e_demo/lib/ur3e_demo
+[2.875s] Installing move_client_with_env script to /home/roboticslab/ros2_ws/install/ur3e_demo/lib/ur3e_demo
+[2.876s] Installing move_ur3e script to /home/roboticslab/ros2_ws/install/ur3e_demo/lib/ur3e_demo
+[2.876s] 
+[2.876s] Installed /home/roboticslab/ros2_ws/build/ur3e_demo
+[2.876s] running symlink_data
+[2.876s] creating /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index
+[2.876s] creating /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index/resource_index
+[2.876s] creating /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index/resource_index/packages
+[2.876s] symbolically linking /home/roboticslab/ros2_ws/build/ur3e_demo/resource/ur3e_demo -> /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index/resource_index/packages
+[2.877s] symbolically linking /home/roboticslab/ros2_ws/build/ur3e_demo/package.xml -> /home/roboticslab/ros2_ws/install/ur3e_demo/share/ur3e_demo
+[2.920s] Invoked command in '/home/roboticslab/ros2_ws/build/ur3e_demo' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/ur3e_demo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/ur3e_demo/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/ur3e_demo/build --no-deps symlink_data

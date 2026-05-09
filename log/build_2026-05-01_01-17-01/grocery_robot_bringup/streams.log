@@ -1,0 +1,24 @@
+[3.172s] Invoking command in '/home/roboticslab/ros2_ws/build/grocery_robot_bringup': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/grocery_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/grocery_robot_bringup/build --no-deps symlink_data
+[3.680s] running develop
+[4.080s] running egg_info
+[4.080s] creating grocery_robot_bringup.egg-info
+[4.118s] writing grocery_robot_bringup.egg-info/PKG-INFO
+[4.118s] writing dependency_links to grocery_robot_bringup.egg-info/dependency_links.txt
+[4.119s] writing requirements to grocery_robot_bringup.egg-info/requires.txt
+[4.119s] writing top-level names to grocery_robot_bringup.egg-info/top_level.txt
+[4.119s] writing manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+[4.197s] reading manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+[4.198s] writing manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+[4.241s] running build_ext
+[4.241s] Creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages/grocery-robot-bringup.egg-link (link to .)
+[4.241s] 
+[4.242s] Installed /home/roboticslab/ros2_ws/build/grocery_robot_bringup
+[4.242s] running symlink_data
+[4.242s] creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index
+[4.242s] creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index/resource_index
+[4.242s] creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index/resource_index/packages
+[4.242s] symbolically linking /home/roboticslab/ros2_ws/build/grocery_robot_bringup/resource/grocery_robot_bringup -> /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index/resource_index/packages
+[4.243s] symbolically linking /home/roboticslab/ros2_ws/build/grocery_robot_bringup/package.xml -> /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/grocery_robot_bringup
+[4.243s] creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/grocery_robot_bringup/launch
+[4.243s] symbolically linking /home/roboticslab/ros2_ws/build/grocery_robot_bringup/launch/grocery_robot_bringup.launch.py -> /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/grocery_robot_bringup/launch
+[4.296s] Invoked command in '/home/roboticslab/ros2_ws/build/grocery_robot_bringup' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/grocery_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/grocery_robot_bringup/build --no-deps symlink_data

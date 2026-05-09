@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_files("/home/roboticslab/ros2_ws/src/yolo_ros/yolo_bringup" FILES "/home/roboticslab/ros2_ws/build/yolo_bringup/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/yolo_bringup" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

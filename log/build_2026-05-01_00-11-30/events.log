@@ -1,0 +1,16 @@
+[0.000000] (-) TimerEvent: {}
+[0.000180] (-) JobUnselected: {'identifier': 'grocery_perception'}
+[0.000216] (-) JobUnselected: {'identifier': 'grocery_robot_bringup'}
+[0.000236] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.000253] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.000267] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.000281] (-) JobUnselected: {'identifier': 'realsense2_ros_mqtt_bridge'}
+[0.000295] (-) JobUnselected: {'identifier': 'realsense2_rviz_plugin'}
+[0.000308] (-) JobUnselected: {'identifier': 'so101_gripper_control'}
+[0.000322] (-) JobUnselected: {'identifier': 'ur3e_demo'}
+[0.000335] (-) JobUnselected: {'identifier': 'yolo_msgs'}
+[0.000349] (-) JobUnselected: {'identifier': 'yolo_ros'}
+[0.000365] (yolo_bringup) JobQueued: {'identifier': 'yolo_bringup', 'dependencies': OrderedDict({'yolo_msgs': '/home/roboticslab/ros2_ws/install/yolo_msgs', 'yolo_ros': '/home/roboticslab/ros2_ws/install/yolo_ros'})}
+[0.000712] (yolo_bringup) JobStarted: {'identifier': 'yolo_bringup'}
+[0.019790] (yolo_bringup) JobEnded: {'identifier': 'yolo_bringup', 'rc': 1}
+[0.030206] (-) EventReactorShutdown: {}

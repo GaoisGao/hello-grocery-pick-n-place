@@ -1,0 +1,5 @@
+feetech-servo-sdk
+setuptools
+
+[test]
+pytest

@@ -1,0 +1,53 @@
+running develop
+Removing /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery-perception.egg-link (link to .)
+running egg_info
+writing ../../build/grocery_perception/grocery_perception.egg-info/PKG-INFO
+writing dependency_links to ../../build/grocery_perception/grocery_perception.egg-info/dependency_links.txt
+writing entry points to ../../build/grocery_perception/grocery_perception.egg-info/entry_points.txt
+writing requirements to ../../build/grocery_perception/grocery_perception.egg-info/requires.txt
+writing top-level names to ../../build/grocery_perception/grocery_perception.egg-info/top_level.txt
+reading manifest file '../../build/grocery_perception/grocery_perception.egg-info/SOURCES.txt'
+writing manifest file '../../build/grocery_perception/grocery_perception.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/roboticslab/ros2_ws/build/grocery_perception/build
+creating /home/roboticslab/ros2_ws/build/grocery_perception/build/lib
+creating /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/pick_executor.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/object_pose_transformer.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/object_pose_estimator.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/pre_grasp_moveit_action_client.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/ik_checker.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/__init__.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/pick_planner.py -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+copying grocery_perception/py.typed -> /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception
+running install
+running install_lib
+creating /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/pick_executor.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/object_pose_transformer.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/object_pose_estimator.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/py.typed -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/pre_grasp_moveit_action_client.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/ik_checker.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/__init__.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+copying /home/roboticslab/ros2_ws/build/grocery_perception/build/lib/grocery_perception/pick_planner.py -> /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/pick_executor.py to pick_executor.cpython-312.pyc
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/object_pose_transformer.py to object_pose_transformer.cpython-312.pyc
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/object_pose_estimator.py to object_pose_estimator.cpython-312.pyc
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/pre_grasp_moveit_action_client.py to pre_grasp_moveit_action_client.cpython-312.pyc
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/ik_checker.py to ik_checker.cpython-312.pyc
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception/pick_planner.py to pick_planner.cpython-312.pyc
+running install_data
+copying resource/grocery_perception -> /home/roboticslab/ros2_ws/install/grocery_perception/share/ament_index/resource_index/packages
+copying package.xml -> /home/roboticslab/ros2_ws/install/grocery_perception/share/grocery_perception
+running install_egg_info
+Copying ../../build/grocery_perception/grocery_perception.egg-info to /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery_perception-0.0.0-py3.12.egg-info
+running install_scripts
+Installing ik_checker script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+Installing object_pose_estimator script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+Installing object_pose_transformer script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+Installing pick_executor script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+Installing pick_planner script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+writing list of installed files to '/home/roboticslab/ros2_ws/build/grocery_perception/install.log'

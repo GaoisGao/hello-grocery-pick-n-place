@@ -1,0 +1,17 @@
+running develop
+running egg_info
+writing grocery_perception.egg-info/PKG-INFO
+writing dependency_links to grocery_perception.egg-info/dependency_links.txt
+writing entry points to grocery_perception.egg-info/entry_points.txt
+writing requirements to grocery_perception.egg-info/requires.txt
+writing top-level names to grocery_perception.egg-info/top_level.txt
+reading manifest file 'grocery_perception.egg-info/SOURCES.txt'
+writing manifest file 'grocery_perception.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/roboticslab/ros2_ws/install/grocery_perception/lib/python3.12/site-packages/grocery-perception.egg-link (link to .)
+Installing object_pose_estimator script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+Installing object_pose_transformer script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+Installing pick_planner script to /home/roboticslab/ros2_ws/install/grocery_perception/lib/grocery_perception
+
+Installed /home/roboticslab/ros2_ws/build/grocery_perception
+running symlink_data

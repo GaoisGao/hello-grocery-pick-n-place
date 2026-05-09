@@ -1,0 +1,2 @@
+[console_scripts]
+gripper_node = so101_gripper_control.gripper_node:main

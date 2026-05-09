@@ -1,0 +1,17 @@
+[1.306s] Invoking command in '/home/roboticslab/ros2_ws/build/so101_gripper_control': CONDA_PROMPT_MODIFIER=(lerobot) DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/so101_gripper_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/so101_gripper_control/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/so101_gripper_control/build --no-deps symlink_data
+[1.805s] running develop
+[2.179s] running egg_info
+[2.217s] writing so101_gripper_control.egg-info/PKG-INFO
+[2.218s] writing dependency_links to so101_gripper_control.egg-info/dependency_links.txt
+[2.218s] writing entry points to so101_gripper_control.egg-info/entry_points.txt
+[2.218s] writing requirements to so101_gripper_control.egg-info/requires.txt
+[2.218s] writing top-level names to so101_gripper_control.egg-info/top_level.txt
+[2.296s] reading manifest file 'so101_gripper_control.egg-info/SOURCES.txt'
+[2.297s] writing manifest file 'so101_gripper_control.egg-info/SOURCES.txt'
+[2.336s] running build_ext
+[2.336s] Creating /home/roboticslab/ros2_ws/install/so101_gripper_control/lib/python3.12/site-packages/so101-gripper-control.egg-link (link to .)
+[2.337s] Installing gripper_node script to /home/roboticslab/ros2_ws/install/so101_gripper_control/lib/so101_gripper_control
+[2.337s] 
+[2.337s] Installed /home/roboticslab/ros2_ws/build/so101_gripper_control
+[2.337s] running symlink_data
+[2.378s] Invoked command in '/home/roboticslab/ros2_ws/build/so101_gripper_control' returned '0': CONDA_PROMPT_MODIFIER=(lerobot) DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/so101_gripper_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/so101_gripper_control/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/so101_gripper_control/build --no-deps symlink_data

@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_files("/home/roboticslab/ros2_ws/src/yolo_ros/yolo_bringup" FILES "/opt/ros/kilted/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/yolo_bringup/environment")

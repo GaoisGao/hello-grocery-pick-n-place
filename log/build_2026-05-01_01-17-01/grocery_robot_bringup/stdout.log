@@ -1,0 +1,22 @@
+running develop
+running egg_info
+creating grocery_robot_bringup.egg-info
+writing grocery_robot_bringup.egg-info/PKG-INFO
+writing dependency_links to grocery_robot_bringup.egg-info/dependency_links.txt
+writing requirements to grocery_robot_bringup.egg-info/requires.txt
+writing top-level names to grocery_robot_bringup.egg-info/top_level.txt
+writing manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+reading manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+writing manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages/grocery-robot-bringup.egg-link (link to .)
+
+Installed /home/roboticslab/ros2_ws/build/grocery_robot_bringup
+running symlink_data
+creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index
+creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index/resource_index
+creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index/resource_index/packages
+symbolically linking /home/roboticslab/ros2_ws/build/grocery_robot_bringup/resource/grocery_robot_bringup -> /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/ament_index/resource_index/packages
+symbolically linking /home/roboticslab/ros2_ws/build/grocery_robot_bringup/package.xml -> /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/grocery_robot_bringup
+creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/grocery_robot_bringup/launch
+symbolically linking /home/roboticslab/ros2_ws/build/grocery_robot_bringup/launch/grocery_robot_bringup.launch.py -> /home/roboticslab/ros2_ws/install/grocery_robot_bringup/share/grocery_robot_bringup/launch

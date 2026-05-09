@@ -1,0 +1,1 @@
+/home/roboticslab/ros2_ws/build/yolo_msgs/rosidl_generator_cpp/yolo_msgs/msg/detail/mask__struct.hpp

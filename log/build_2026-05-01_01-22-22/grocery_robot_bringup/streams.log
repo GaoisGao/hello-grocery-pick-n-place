@@ -1,0 +1,15 @@
+[1.327s] Invoking command in '/home/roboticslab/ros2_ws/build/grocery_robot_bringup': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/grocery_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/grocery_robot_bringup/build --no-deps symlink_data
+[1.857s] running develop
+[2.251s] running egg_info
+[2.290s] writing grocery_robot_bringup.egg-info/PKG-INFO
+[2.291s] writing dependency_links to grocery_robot_bringup.egg-info/dependency_links.txt
+[2.291s] writing requirements to grocery_robot_bringup.egg-info/requires.txt
+[2.291s] writing top-level names to grocery_robot_bringup.egg-info/top_level.txt
+[2.369s] reading manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+[2.370s] writing manifest file 'grocery_robot_bringup.egg-info/SOURCES.txt'
+[2.409s] running build_ext
+[2.410s] Creating /home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages/grocery-robot-bringup.egg-link (link to .)
+[2.410s] 
+[2.410s] Installed /home/roboticslab/ros2_ws/build/grocery_robot_bringup
+[2.410s] running symlink_data
+[2.451s] Invoked command in '/home/roboticslab/ros2_ws/build/grocery_robot_bringup' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/roboticslab/ros2_ws/build/grocery_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/roboticslab/ros2_ws/install/grocery_robot_bringup/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/roboticslab/ros2_ws/build/grocery_robot_bringup/build --no-deps symlink_data

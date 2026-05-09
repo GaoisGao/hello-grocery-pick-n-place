@@ -1,0 +1,4 @@
+[console_scripts]
+hardcoded_pick_bt = ur3e_demo.hardcoded_pick_bt:main
+move_client_with_env = ur3e_demo.move_client_with_env:main
+move_ur3e = ur3e_demo.ur3e_move_client:main

@@ -1,0 +1,24 @@
+running develop
+running egg_info
+creating ur3e_demo.egg-info
+writing ur3e_demo.egg-info/PKG-INFO
+writing dependency_links to ur3e_demo.egg-info/dependency_links.txt
+writing entry points to ur3e_demo.egg-info/entry_points.txt
+writing requirements to ur3e_demo.egg-info/requires.txt
+writing top-level names to ur3e_demo.egg-info/top_level.txt
+writing manifest file 'ur3e_demo.egg-info/SOURCES.txt'
+reading manifest file 'ur3e_demo.egg-info/SOURCES.txt'
+writing manifest file 'ur3e_demo.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/roboticslab/ros2_ws/install/ur3e_demo/lib/python3.12/site-packages/ur3e-demo.egg-link (link to .)
+Installing hardcoded_pick_bt script to /home/roboticslab/ros2_ws/install/ur3e_demo/lib/ur3e_demo
+Installing move_client_with_env script to /home/roboticslab/ros2_ws/install/ur3e_demo/lib/ur3e_demo
+Installing move_ur3e script to /home/roboticslab/ros2_ws/install/ur3e_demo/lib/ur3e_demo
+
+Installed /home/roboticslab/ros2_ws/build/ur3e_demo
+running symlink_data
+creating /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index
+creating /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index/resource_index
+creating /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index/resource_index/packages
+symbolically linking /home/roboticslab/ros2_ws/build/ur3e_demo/resource/ur3e_demo -> /home/roboticslab/ros2_ws/install/ur3e_demo/share/ament_index/resource_index/packages
+symbolically linking /home/roboticslab/ros2_ws/build/ur3e_demo/package.xml -> /home/roboticslab/ros2_ws/install/ur3e_demo/share/ur3e_demo

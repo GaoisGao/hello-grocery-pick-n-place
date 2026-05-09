@@ -1,0 +1,6 @@
+[console_scripts]
+ik_checker = grocery_perception.ik_checker:main
+object_pose_estimator = grocery_perception.object_pose_estimator:main
+object_pose_transformer = grocery_perception.object_pose_transformer:main
+pick_executor = grocery_perception.pick_executor:main
+pick_planner = grocery_perception.pick_planner:main

@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_files("/home/roboticslab/ros2_ws/src/yolo_ros/yolo_msgs" FILES "/home/roboticslab/ros2_ws/build/yolo_msgs/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/yolo_msgs" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")

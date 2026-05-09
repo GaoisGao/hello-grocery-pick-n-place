@@ -1,0 +1,23 @@
+digraph G {
+"odom" -> "base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 50.185\nBuffer length: 4.982\nMost recent transform: 1777530112.528588\nOldest transform: 1777530107.546983\n"];
+"map" -> "odom"[label=" Broadcaster: default_authority\nAverage rate: 29.693\nBuffer length: 4.984\nMost recent transform: 1777530112.710936\nOldest transform: 1777530107.726609\n"];
+"base" -> "tool0_controller"[label=" Broadcaster: default_authority\nAverage rate: 499.996\nBuffer length: 3.738\nMost recent transform: 1777530112.545081\nOldest transform: 1777530108.807053\n"];
+"base_link" -> "base"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"upper_arm_link" -> "forearm_link"[label=" Broadcaster: default_authority\nAverage rate: 19.847\nBuffer length: 3.93\nMost recent transform: 1777530112.517081\nOldest transform: 1777530108.587083\n"];
+"shoulder_link" -> "upper_arm_link"[label=" Broadcaster: default_authority\nAverage rate: 19.847\nBuffer length: 3.93\nMost recent transform: 1777530112.517081\nOldest transform: 1777530108.587083\n"];
+"base_link_inertia" -> "shoulder_link"[label=" Broadcaster: default_authority\nAverage rate: 19.847\nBuffer length: 3.93\nMost recent transform: 1777530112.517081\nOldest transform: 1777530108.587083\n"];
+"base_link" -> "base_link_inertia"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"forearm_link" -> "wrist_1_link"[label=" Broadcaster: default_authority\nAverage rate: 19.847\nBuffer length: 3.93\nMost recent transform: 1777530112.517081\nOldest transform: 1777530108.587083\n"];
+"wrist_1_link" -> "wrist_2_link"[label=" Broadcaster: default_authority\nAverage rate: 19.847\nBuffer length: 3.93\nMost recent transform: 1777530112.517081\nOldest transform: 1777530108.587083\n"];
+"wrist_2_link" -> "wrist_3_link"[label=" Broadcaster: default_authority\nAverage rate: 19.847\nBuffer length: 3.93\nMost recent transform: 1777530112.517081\nOldest transform: 1777530108.587083\n"];
+"base_footprint" -> "openni_depth_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"world" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"flange" -> "tool0"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"wrist_3_link" -> "flange"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"wrist_3_link" -> "ft_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"world" -> "UR20215300099_world"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1777530112.5572631"[ shape=plaintext ] ;
+}->"world";
+}
