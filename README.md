@@ -34,6 +34,9 @@ Camera → Perception Node → Object Pose Estimation → MoveIt Planning Node �
 
 <img width="1517" height="954" alt="image" src="https://github.com/user-attachments/assets/3fe99509-a962-4b0f-b7f5-8275b7e56375" />
 
+<img width="794" height="885" alt="image" src="https://github.com/user-attachments/assets/97d206e4-7b72-4097-8e3d-bf8e2ad4156b" />
+
+
 ## 3. Package Structure
 
 The main ROS 2 packages used in this project include:
