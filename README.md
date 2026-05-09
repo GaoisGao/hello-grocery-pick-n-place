@@ -231,3 +231,7 @@ Activate the `lerobot` environment:
 ```bash
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate lerobot
+
+<img width="1517" height="954" alt="image" src="https://github.com/user-attachments/assets/3fe99509-a962-4b0f-b7f5-8275b7e56375" />
+
+
