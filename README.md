@@ -40,6 +40,7 @@ This project is implemented as a ROS 2-based perception-to-manipulation pipeline
 The current implementation follows this pipeline:
 
 Camera image/depth stream → YOLO object detection → object 3D pose estimation → TF transformation to `base_link` → pick pose planning → MoveIt trajectory execution → gripper open/close control
+<img width="1517" height="954" alt="image" src="https://github.com/user-attachments/assets/3fe99509-a962-4b0f-b7f5-8275b7e56375" />
 
 Before running any ROS 2 node, source the ROS 2 Kilted environment and the workspace:
 
@@ -232,6 +233,6 @@ Activate the `lerobot` environment:
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate lerobot
 
-<img width="1517" height="954" alt="image" src="https://github.com/user-attachments/assets/3fe99509-a962-4b0f-b7f5-8275b7e56375" />
+
 
 
