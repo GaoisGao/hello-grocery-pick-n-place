@@ -43,30 +43,20 @@ Camera image/depth stream → YOLO object detection → object 3D pose estimatio
 
 <img width="1517" height="954" alt="image" src="https://github.com/user-attachments/assets/3fe99509-a962-4b0f-b7f5-8275b7e56375" />
 
-Before running any ROS 2 node, source the ROS 2 Kilted environment and the workspace:
-
-```bash
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
-
 Terminal 1: Start the UR3e Driver
 
-Launch the Universal Robots driver and connect to the physical UR3e robot:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Launch the Universal Robots driver and connect to the physical UR3e arm.
 
 ros2 launch ur_robot_driver ur_control.launch.py \
   ur_type:=ur3e \
   robot_ip:=10.3.4.11 \
   launch_rviz:=false
 
+This starts the robot driver and provides the hardware interface for the UR3e.
+
 Terminal 2: Start MoveIt
 
-Launch the MoveIt configuration for the UR3e arm:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Launch the MoveIt configuration for the UR3e arm.
 
 ros2 launch ur_moveit_config ur_moveit.launch.py \
   ur_type:=ur3e \
@@ -75,13 +65,9 @@ ros2 launch ur_moveit_config ur_moveit.launch.py \
 Optional motion test:
 
 ros2 run ur3e_demo move_client_with_env
-
 Terminal 3: Start the RealSense Camera
 
-Launch the RealSense RGB-D camera with aligned depth enabled:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Launch the RealSense RGB-D camera with color, depth, and aligned depth enabled.
 
 ros2 launch realsense2_camera rs_launch.py \
   enable_color:=true \
@@ -89,13 +75,9 @@ ros2 launch realsense2_camera rs_launch.py \
   align_depth.enable:=true \
   depth_module.depth_profile:=640x480x30 \
   rgb_camera.color_profile:=640x480x30
-
 Terminal 4: Run YOLOv11 Object Detection
 
-Run YOLOv11 on the RealSense color image topic:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Run YOLOv11 on the RealSense color image topic.
 
 ros2 launch yolo_bringup yolo.launch.py \
   model:=yolo11n.pt \
@@ -107,38 +89,31 @@ ros2 launch yolo_bringup yolo.launch.py \
   imgsz_width:=320 \
   use_debug:=True
 
-To visualize YOLO detection results, open RViz2 and add the debug image topic:
-
-rviz2
+To visualize YOLO detection results, use either RViz2 or rqt_image_view.
 
 In RViz2:
 
 Add → By topic → /yolo/dbg_image → Image
 Fixed Frame = base_link
 
-Alternatively, use rqt_image_view:
+Or use:
 
 ros2 run rqt_image_view rqt_image_view /yolo/dbg_image
+Terminal 5: Publish Camera Mount TF
 
-Terminal 5: Publish the Camera Mount TF
-
-Launch the project bringup file to publish the static transform between the robot tool frame and the camera frame:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Launch the project bringup file. This publishes the static transform between the UR3e tool frame and the wrist-mounted camera frame.
 
 ros2 launch grocery_robot_bringup grocery_robot_bringup.launch.py
 
-This should publish the transform:
+This should publish:
 
 tool0 → camera_link
 
+This transform is required so the detected object position can be transformed from the camera frame into the robot base frame.
+
 Terminal 6: Run the Object Pose Estimator
 
-Estimate the 3D position of the target object from YOLO detections and aligned depth data:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Estimate the 3D object position from YOLO detections and aligned RealSense depth.
 
 ros2 run grocery_perception object_pose_estimator --ros-args \
   -p target_class:=orange \
@@ -147,34 +122,37 @@ ros2 run grocery_perception object_pose_estimator --ros-args \
   -p buffer_size:=10 \
   -p max_position_std_m:=0.025
 
-Terminal 7: Transform Object Pose to Robot Base Frame
+The estimator filters detections and publishes a stable object pose in the camera frame.
 
-Transform the detected object pose from the camera frame into the UR3e base_link frame:
+Terminal 7: Transform Object Pose to base_link
 
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Transform the detected object pose from the camera frame into the UR3e base_link frame.
 
 ros2 run grocery_perception object_pose_transformer --ros-args \
   -p target_frame:=base_link
 
+The transformed pose is used by the pick planner.
+
 Terminal 8: Run the Pick Planner
 
-Generate pre-grasp, grasp, and lift poses based on the transformed object position:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+Generate the pre-grasp, grasp, and lift poses from the transformed object position.
 
 ros2 run grocery_perception pick_planner --ros-args \
   -p pre_grasp_z_offset:=0.20 \
   -p grasp_z_offset:=0.08 \
   -p lift_z_offset:=0.28
 
-Terminal 9: Execute the Pick Motion
+The planner publishes:
 
-Run the pick executor to send the planned poses to MoveIt and execute the robot trajectory:
+/pre_grasp_pose
+/grasp_pose
+/lift_pose
 
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+These poses are relative to the base_link frame.
+
+Terminal 9: Run the Pick Executor
+
+Run the pick executor to send the generated poses to MoveIt and execute the UR3e trajectory.
 
 ros2 run grocery_perception pick_executor --ros-args \
   -p move_group_action:=/move_action \
@@ -188,13 +166,18 @@ ros2 run grocery_perception pick_executor --ros-args \
 
 For safer testing, set:
 
--p plan_only:=true
+plan_only:=true
 
 This allows MoveIt to plan the motion without executing it on the real robot.
 
+To start the pick sequence:
+
+ros2 topic pub /start_pick std_msgs/msg/Bool "data: true" --once
 Terminal 10: Run the SO-101 Gripper Node
 
-The SO-101 gripper node runs inside the lerobot conda environment:
+The SO-101 gripper node requires the lerobot conda environment.
+
+First activate the environment:
 
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate lerobot
@@ -212,28 +195,25 @@ Expected output:
 
 [INFO] [so101_gripper_node]: SO-101 gripper node started on /dev/ttyACM0, servo ID 6
 
-To manually test the gripper, publish open and close commands from another terminal:
-
-source /opt/ros/kilted/setup.bash
-source ~/ros2_ws/install/setup.bash
+To manually test the gripper from another ROS-sourced terminal:
 
 ros2 topic pub /gripper_cmd std_msgs/msg/String "data: 'open'" --once
 ros2 topic pub /gripper_cmd std_msgs/msg/String "data: 'close'" --once
-
-## Gripper Setup
+Gripper Setup
 
 The project supports two gripper modes: a real SO-101 gripper mode and a mock gripper mode.
 
-### Real SO-101 Gripper
+Real SO-101 Gripper
 
-The real gripper requires the `lerobot` conda environment, the SO-101 servo SDK, serial access to the controller board, and the physical gripper connected through `/dev/ttyACM0`.
+The real gripper requires:
 
-Activate the `lerobot` environment:
+the lerobot conda environment,
+the SO-101 servo SDK,
+serial access to the controller board,
+the physical gripper connected through /dev/ttyACM0.
 
-```bash
+Activate the environment before running the real gripper node:
+
 source ~/miniforge3/etc/profile.d/conda.sh
 conda activate lerobot
-
-
-
 
